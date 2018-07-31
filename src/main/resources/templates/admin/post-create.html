@@ -1,15 +1,41 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head th:replace="layout :: site-head">
 </head>
 
 <body>
 
-	<header th:replace="layout :: site-header"></header>
-	
-	post create
-	
+	<header th:replace="layout :: site-header"></header> 
+
+	<form th:action="@{/admin/post-create}" th:object="${post}" method="post">
+			<div class="form-row">
+			
+				<div class="form-group col-md-6">
+					<label for="inputTitle">Title</label>
+					<input type="text" class="form-control" th:field="*{title}" placeholder="Title"/>
+				</div>
+				
+				<div class="form-group col-md-6">
+					<label for="inputShort">Short content</label>
+					<textarea class="form-control" th:field="*{short_content}" placeholder="Short content" required></textarea>
+				</div>
+				
+			</div>
+			
+			<div class="form-group col-md-4">
+				
+				<label for="inputFull">Full content</label>
+					<textarea class="form-control" th:field="*{full_content}" placeholder="Full content" required></textarea>
+			</div>
+			
+			<br>
+			
+			<button type="submit" class="btn btn-primary">Post!</button>
+			
+		</form>
+
 	<footer th:replace="layout :: site-footer"></footer>
 
 </body>

@@ -56,6 +56,9 @@ public class Post {
 	public void setPublished_on(Date published_on) {
 		this.published_on = published_on;
 	}
+	public void setCurrentDate() {
+		this.published_on = new Date();
+	}
 	@Override
 	public String toString() {
 		return "Post [id=" + id + ", title=" + title + ", short_content=" + short_content + ", full_content="
