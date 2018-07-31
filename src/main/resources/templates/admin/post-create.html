@@ -7,7 +7,9 @@
 
 <body>
 
-	<header th:replace="layout :: site-header"></header> 
+	<header th:replace="layout :: site-header"></header>
+	
+	<h2 style="text-align: center;">CREATE A POST</h2>
 
 	<form th:action="@{/admin/post-create}" th:object="${post}" method="post">
 			<div class="form-row">

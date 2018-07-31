@@ -17,7 +17,7 @@ public class HomeController {
 	
     @GetMapping("/")
     public String indexPage(Model model) {
-        model.addAttribute("posts", postRepository.findAll());
+        model.addAttribute("posts", postRepository.findAllByDate());
         return "index";
     }
 

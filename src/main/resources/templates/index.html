@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
 <head th:replace="layout :: site-head">
 </head>
@@ -10,36 +11,38 @@
 
 	<div align="center" sec:authorize="hasAuthority('ADMIN')">
 
-		<button onclick="location.href='/admin/post-create'" type="button" class="btn btn-primary">Add Post</button>
+		<button onclick="location.href='/admin/post-create'" type="button"
+			class="btn btn-primary">Add Post</button>
 
 	</div>
-	
+
 	<h2 style="text-align: center;">ALL POSTS</h2>
 
 	<div class="container">
 
 		<tr th:each="post : ${posts}">
-			
-			<div style="background-color: lightgrey;">
 
-				<a th:href="@{/posts/{postId} (postId=${post.id})}">
-					<h2><td th:text="${post.title}"></td></h2>
-				</a>
-				
-				<p>
-					<td th:text="${post.short_content}"></td>
-				</p>
-				
-				<label>Author: </label>
-				<td th:text="${post.author}"></td> <br>
-				
-				<label>Published on: </label>
-				<td th:text="${post.published_on}"></td> <br>
+			<div class="well" style="word-wrap: break-word;">
+				<div class="media">
 
+					<div class="media-body">
+
+						<a th:href="@{/posts/{postId} (postId=${post.id})}">
+							<h4 class="media-heading" th:text="${post.title}"></h4>
+						</a>
+
+						<p class="text-right" th:text="'By ' + ${post.author}"></p>
+						<p th:text="${post.short_content}"></p>
+
+						<ul class="list-inline list-unstyled">
+							<li><span><i th:text="'Published on:' + ${post.published_on}"></i></span></li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		</tr>
 	</div>
-	
+
 	<footer th:replace="layout :: site-footer"></footer>
 
 </body>

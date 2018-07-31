@@ -7,29 +7,32 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<script
+	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <body>
 
 	<header th:fragment="site-header">
 
-		<div sec:authorize="!isAuthenticated()">
 
-			<nav class="navbar navbar-inverse">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target="#myNavbar">
-							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#">Blog</a>
-					</div>
-					<div class="collapse navbar-collapse" id="myNavbar">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Home</a></li>
-						</ul>
+
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse"
+						data-target="#myNavbar">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/">Blog</a>
+				</div>
+				<div class="collapse navbar-collapse" id="myNavbar">
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="/">Home</a></li>
+					</ul>
+
+					<div sec:authorize="!isAuthenticated()">
 
 						<form th:action="@{/}" method="POST"
 							class="navbar-form navbar-right">
@@ -51,46 +54,29 @@
 							<button type="submit" class="btn btn-primary">Login</button>
 
 						</form>
-
 					</div>
 
-				</div>
-			</nav>
-		</div>
-
-		<div sec:authorize="hasAuthority('ADMIN')">
-
-			<nav class="navbar navbar-inverse">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<button type="button" class="navbar-toggle" data-toggle="collapse"
-							data-target="#myNavbar">
-							<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-								class="icon-bar"></span>
-						</button>
-						<a class="navbar-brand" href="#">Blog</a>
-					</div>
-					<div class="collapse navbar-collapse" id="myNavbar">
-						<ul class="nav navbar-nav">
-							<li class="active"><a href="#">Home</a></li>
-						</ul>
+					<div sec:authorize="hasAuthority('ADMIN')">
 
 						<div class="navbar-form navbar-right">
 							<form th:action="@{/logout}" method="get">
-								<button class="btn btn-primary" name="registration"
-									type="Submit">Logout</button>
+								<button class="btn btn-primary" name="logout" type="Submit">Logout</button>
 							</form>
 						</div>
-
-						LOGGED IN AS ADMIN
+						
+						<div class="navbar-right">
+							LOGGED IN AS ADMIN
+						</div>
 
 					</div>
 
 				</div>
-			</nav>
 
-		</div>
+			</div>
+		</nav>
+
 	</header>
+
 
 	<!-- Footer -->
 	<footer class="navbar navbar-default navbar-fixed-bottom"
