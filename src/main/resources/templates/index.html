@@ -11,8 +11,7 @@
 
 	<div align="center" sec:authorize="hasAuthority('ADMIN')">
 
-		<button onclick="location.href='/admin/post-create'" type="button"
-			class="btn btn-primary">Add Post</button>
+		<a th:href="@{/admin/post-create}"class="btn btn-primary">Add Post</a>
 
 	</div>
 
@@ -40,7 +39,16 @@
 					</div>
 				</div>
 			</div>
+			
+			<div sec:authorize="hasAuthority('ADMIN')">
+
+				<a th:href="@{/admin/post-edit(postId=${post.id})}" class="btn btn-danger">Edit</a>
+				<a th:href="@{/admin/post-delete(postId=${post.id})}" onclick="return confirm('are you sure?')" class="btn btn-danger" >Delete</a>
+
+            </div>
+			
 		</tr>
+		
 	</div>
 
 	<footer th:replace="layout :: site-footer"></footer>

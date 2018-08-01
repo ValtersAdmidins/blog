@@ -28,12 +28,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
-	  public void configure(AuthenticationManagerBuilder builder)
+	public void configure(AuthenticationManagerBuilder builder)
 	          throws Exception {
-	      builder.inMemoryAuthentication()
-	             .withUser("aaa")
-	             .password("{noop}123")
-	             .authorities("ADMIN");
-	  }
+		
+		builder.inMemoryAuthentication()
+		             .withUser("aaa")
+		.password("{noop}123")
+		.authorities("ADMIN");
+	}
 	
 }

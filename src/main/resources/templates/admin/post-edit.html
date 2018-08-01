@@ -9,15 +9,17 @@
 
 	<header th:replace="layout :: site-header"></header>
 	
-	<h2 style="text-align: center;">CREATE A POST</h2>
+	<h2 style="text-align: center;">EDIT A POST</h2>
 
-	<form th:action="@{/admin/post-create}" th:object="${post}" method="post">
+	<form th:action="@{/admin/post-edit}" th:object="${post}" method="post">
+			
+			<input type="hidden" th:field="*{id}">
 			
 			<div class="form-row">
 			
 				<div class="form-group col-md-6">
 					<label for="inputTitle">Title</label>
-					<input type="text" class="form-control" th:field="*{title}" placeholder="Title" required/>
+					<input type="text" class="form-control" th:field="*{title}" placeholder="Title"/>
 				</div>
 				
 				<div class="form-group col-md-6">
@@ -28,8 +30,9 @@
 			</div>
 			
 			<div class="form-group col-md-4">
+				
 				<label for="inputFull">Full content</label>
-				<textarea class="form-control" th:field="*{full_content}" placeholder="Full content" required></textarea>
+					<textarea class="form-control" th:field="*{full_content}" placeholder="Full content" required></textarea>
 			</div>
 			
 			<br>
