@@ -2,11 +2,20 @@ package com.valters.blog.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Post {
@@ -14,14 +23,23 @@ public class Post {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Size(min = 5, message = "*Your title must have at least 5 characters")
+	@Size(max = 255, message = "*Your title must not exceed 255 characters")
+    @NotEmpty(message = "*Please provide a title")
 	private String title;
 	
-	@Lob
+	@Column(columnDefinition = "TEXT")
 	private String short_content;
 	
-	@Lob
+	@Column(columnDefinition = "TEXT")
 	private String full_content;
+	
 	private String author;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(nullable = false, updatable = false)
+	@CreationTimestamp
 	private Date published_on;
 	
 	public Long getId() {
@@ -59,9 +77,6 @@ public class Post {
 	}
 	public void setPublished_on(Date published_on) {
 		this.published_on = published_on;
-	}
-	public void setCurrentDate() {
-		this.published_on = new Date();
 	}
 	@Override
 	public String toString() {

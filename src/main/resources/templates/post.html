@@ -18,7 +18,7 @@
 				
 					<h4 class="media-heading" th:text="${post.title}"></h4>
 					<p class="text-right" th:text="'By ' + ${post.author}"></p>
-					<p th:text="${post.full_content}"></p>
+					<p align="justify" th:text="${post.full_content}"></p>
 					<ul class="list-inline list-unstyled">
 						<li><span><i th:text="'Published on:' + ${post.published_on}"></i></span></li>
 					</ul>

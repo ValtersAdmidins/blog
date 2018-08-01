@@ -31,10 +31,10 @@
 						</a>
 
 						<p class="text-right" th:text="'By ' + ${post.author}"></p>
-						<p th:text="${post.short_content}"></p>
+						<p align="justify" th:text="${post.short_content}"></p>
 
 						<ul class="list-inline list-unstyled">
-							<li><span><i th:text="'Published on:' + ${post.published_on}"></i></span></li>
+							<li><span><i th:text="'Published on: ' + ${post.published_on}"></i></span></li>
 						</ul>
 					</div>
 				</div>
@@ -47,9 +47,14 @@
 
             </div>
 			
+			<br>
+			
 		</tr>
 		
 	</div>
+	
+	<br>
+	<br>
 
 	<footer th:replace="layout :: site-footer"></footer>
 

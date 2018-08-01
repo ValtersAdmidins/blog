@@ -1,10 +1,13 @@
 package com.valters.blog.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,23 +33,31 @@ public class PostController {
 	}
 
 	@GetMapping("/admin/post-create")
-	public String postCreatePage(Model model) {
+	public String postCreatePage(Model model ) {
 
 		model.addAttribute("post", new Post());
 		return "admin/post-create";
 	}
 
 	@PostMapping("/admin/post-create")
-	public String postCreateProccess(Post post) {
+	public String postCreateProccess(@Valid Post post,
+            BindingResult bindingResult) {
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
+		if (bindingResult.hasErrors()) {
+			
+            return "admin/post-create";
+            
+        } else {
+        	
+        	Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    		String currentPrincipalName = authentication.getName();
 
-		post.setCurrentDate();
-		post.setAuthor(currentPrincipalName);
-
-		postRepository.save(post);
-		return "redirect:/";
+    		post.setAuthor(currentPrincipalName);
+        	
+        	postRepository.save(post);
+            return "redirect:/";
+        }
+		
 	}
 
 	@GetMapping(value = "/admin/post-edit")
@@ -61,16 +72,24 @@ public class PostController {
 	}
 
 	@PostMapping(value = "/admin/post-edit")
-	public String postEditProccess(Post post) {
+	public String postEditProccess(@Valid Post post,
+            BindingResult bindingResult) {
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String currentPrincipalName = authentication.getName();
-
-		post.setCurrentDate();
-		post.setAuthor(currentPrincipalName);
+		if (bindingResult.hasErrors()) {
+			
+            return "admin/post-edit";
+            
+        } else {
 		
-		postRepository.save(post);
-		return "redirect:/";
+			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+			String currentPrincipalName = authentication.getName();
+	
+			post.setAuthor(currentPrincipalName);
+			
+			postRepository.save(post);
+			return "redirect:/";
+        }
+		
 	}
 
 	@GetMapping(value = "/admin/post-delete")
