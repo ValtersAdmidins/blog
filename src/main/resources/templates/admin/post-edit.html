@@ -17,21 +17,21 @@
 		
 		<div class="form-group col-md-4">
 			<label for="inputTitle">Title</label>
-			<input type="text" class="form-control" th:field="*{title}" placeholder="Title"/>
+			<input maxlength="255" type="text" class="form-control" th:field="*{title}" placeholder="Title"/>
 			<label th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
                                class="alert alert-danger"></label>
 		</div>
 			
 		<div class="form-group col-md-4">
 			<label for="inputShort">Short content</label>
-			<textarea class="form-control" th:field="*{short_content}" placeholder="Short content" required></textarea>
+			<textarea class="form-control" rows="4" th:field="*{short_content}" placeholder="Short content" required></textarea>
 			<label th:if="${#fields.hasErrors('short_content')}" th:errors="*{short_content}"
                                class="alert alert-danger"></label>
 		</div>
 		
 		<div class="form-group col-md-4">
 			<label for="inputFull">Full content</label>
-			<textarea class="form-control" th:field="*{full_content}" placeholder="Full content" required></textarea>
+			<textarea class="form-control" rows="8" th:field="*{full_content}" placeholder="Full content" required></textarea>
 			<label th:if="${#fields.hasErrors('full_content')}" th:errors="*{full_content}"
                                class="alert alert-danger"></label>
 		</div>

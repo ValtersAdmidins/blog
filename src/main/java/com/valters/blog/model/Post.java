@@ -42,6 +42,18 @@ public class Post {
 	@CreationTimestamp
 	private Date published_on;
 	
+	public Post() {
+
+	}
+	
+	public Post(String test) {
+		this.title = test + " title";
+		this.short_content = test + " short content";
+		this.full_content = test + " full content";
+		this.author = test + " author";
+		this.published_on = new Date();
+	}
+	
 	public Long getId() {
 		return id;
 	}
