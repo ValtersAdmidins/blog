@@ -11,34 +11,44 @@
 	
 	<h2 style="text-align: center;">EDIT A POST</h2>
 
-	<form th:action="@{/admin/post-edit}" th:object="${post}" method="post">
+	<div class="container">
+		<div class="well" style="word-wrap: break-word;">
+			<div class="media">
+				<div class="media-body">
+				
+					<form th:action="@{/admin/post-edit}" th:object="${post}" method="post">
 			
-		<input type="hidden" th:field="*{id}">
-		
-		<div class="form-group col-md-4">
-			<label for="inputTitle">Title</label>
-			<input maxlength="255" type="text" class="form-control" th:field="*{title}" placeholder="Title"/>
-			<label th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
-                               class="alert alert-danger"></label>
+						<input type="hidden" th:field="*{id}">
+						
+						<div class="form-group col-md-4">
+							<label for="inputTitle">Title</label>
+							<input maxlength="255" type="text" class="form-control" th:field="*{title}" placeholder="Title"/>
+							<label th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+				                               class="alert alert-danger"></label>
+						</div>
+							
+						<div class="form-group col-md-4">
+							<label for="inputShort">Short content</label>
+							<textarea class="form-control" rows="4" th:field="*{short_content}" placeholder="Short content" required></textarea>
+							<label th:if="${#fields.hasErrors('short_content')}" th:errors="*{short_content}"
+				                               class="alert alert-danger"></label>
+						</div>
+						
+						<div class="form-group col-md-4">
+							<label for="inputFull">Full content</label>
+							<textarea class="form-control" rows="8" th:field="*{full_content}" placeholder="Full content" required></textarea>
+							<label th:if="${#fields.hasErrors('full_content')}" th:errors="*{full_content}"
+				                               class="alert alert-danger"></label>
+						</div>
+						<br>
+						<button type="submit" class="btn btn-primary">Post!</button>
+							
+					</form>
+					
+				</div>
+			</div>
 		</div>
-			
-		<div class="form-group col-md-4">
-			<label for="inputShort">Short content</label>
-			<textarea class="form-control" rows="4" th:field="*{short_content}" placeholder="Short content" required></textarea>
-			<label th:if="${#fields.hasErrors('short_content')}" th:errors="*{short_content}"
-                               class="alert alert-danger"></label>
-		</div>
-		
-		<div class="form-group col-md-4">
-			<label for="inputFull">Full content</label>
-			<textarea class="form-control" rows="8" th:field="*{full_content}" placeholder="Full content" required></textarea>
-			<label th:if="${#fields.hasErrors('full_content')}" th:errors="*{full_content}"
-                               class="alert alert-danger"></label>
-		</div>
-		<br>
-		<button type="submit" class="btn btn-primary">Post!</button>
-			
-	</form>
+	</div>
 
 	<footer th:replace="layout :: site-footer"></footer>
 

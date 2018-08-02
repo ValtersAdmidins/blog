@@ -34,7 +34,7 @@
 						<p align="justify" th:text="${post.short_content}"></p>
 
 						<ul class="list-inline list-unstyled">
-							<li><span><i th:text="'Published on: ' + ${post.published_on}"></i></span></li>
+							<li><span><i th:text="'Published on: ' + ${#dates.format(post.published_on, 'yyyy-MM-dd HH:mm:ss')}"></i></span></li>
 						</ul>
 					</div>
 				</div>
@@ -46,16 +46,15 @@
 				<a th:href="@{/admin/post-delete(postId=${post.id})}" onclick="return confirm('are you sure?')" class="btn btn-danger" >Delete</a>
 
             </div>
-			
-			<br>
+            
+            <br>
 			
 		</tr>
 		
 	</div>
-	
-	<br>
-	<br>
 
+	<br>
+	<br>
 	<footer th:replace="layout :: site-footer"></footer>
 
 </body>

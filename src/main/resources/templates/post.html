@@ -9,8 +9,10 @@
 
 	<header th:replace="layout :: site-header"></header>
 
-	<div class="container">
+	<h2 style="text-align: center;">POST</h2>
 
+	<!-- Post -->
+	<div class="container">
 		<div class="well" style="word-wrap: break-word;">
 			<div class="media">
 				<div class="media-body">
@@ -19,14 +21,78 @@
 					<p class="text-right" th:text="'By ' + ${post.author}"></p>
 					<p align="justify" th:text="${post.full_content}"></p>
 					<ul class="list-inline list-unstyled">
-						<li><span><i th:text="'Published on: ' + ${post.published_on}"></i></span></li>
+						<li><span><i th:text="'Published on: ' + ${#dates.format(post.published_on, 'yyyy-MM-dd HH:mm:ss')}"></i></span></li>
 					</ul>
 					
 				</div>
 			</div>
 		</div>
+	</div>
+	
+	<!-- Comment form if logged in -->
+	<div sec:authorize="isAuthenticated()">
+	
+		<div class="container">
+			<div class="well" style="word-wrap: break-word;">
+				<div class="media">
+					<div class="media-body">
+						<form th:action="@{/comment-create}" th:object="${comment}" method="post">
+							
+							<input type="hidden" th:field="*{post.id}">
+							
+							<div class="form-group">
+					            <label th:if="${#fields.hasErrors('content')}" th:errors="*{content}"
+					                   class="alert alert-danger"></label>
+					            <textarea th:field="*{content}"
+					                      placeholder="Comment" class="form-control input-lg"></textarea>
+					        </div>
+					        
+							<br>
+							<button type="submit" class="btn btn-primary">Post!</button>
+								
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
 		
 	</div>
+	
+	<!-- Comments -->
+	<div class="container">
+	    
+	    <h2>COMMENTS:</h2>
+	    
+	    <tr th:each="comment : ${post.comments}">
+	    
+			<div class="well" style="word-wrap: break-word;">
+				<div class="media">
+					<div class="media-body">
+					
+						<h3 th:text="${comment.content}"></h3>
+				        <div th:text="'Published on: ' + ${#dates.format(comment.published_on, 'yyyy-MM-dd HH:mm:ss')}">
+				        </div>
+				        <div th:text="'By ' + ${comment.author}">
+				        </div>
+				        
+					</div>
+				</div>
+			</div>
+			
+			<div sec:authorize="hasAuthority('ADMIN')">
+
+				<a th:href="@{/admin/comment-delete(commentId=${comment.id})}" onclick="return confirm('are you sure?')" class="btn btn-danger" >Delete</a>
+
+            </div>
+            
+            <br>
+			
+		</tr>
+		
+    </div>
+    
+    <br>
+    <br>
 
 	<footer th:replace="layout :: site-footer"></footer>
 

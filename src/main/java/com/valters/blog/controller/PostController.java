@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.valters.blog.exception.ResourceNotFoundException;
+import com.valters.blog.model.Comment;
 import com.valters.blog.model.Post;
 import com.valters.blog.repository.PostRepository;
 
@@ -34,7 +35,11 @@ public class PostController {
 		logger.info("Retrieving single post by id");
 		model.addAttribute("post",
 				postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId)));
-
+		
+		Comment comment = new Comment();
+		comment.setPost(postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId)));
+		model.addAttribute("comment", comment);
+		
 		logger.info("Opening single post page");
 		return "post";
 	}
